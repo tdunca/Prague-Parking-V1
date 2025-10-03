@@ -1,10 +1,10 @@
-# Prague Parking
+## Prague Parking
 
 This is a school assignment for DevSecOps #C
 
-## Innehållsförtäckning
-## Funktioner
-## Installation
+### Innehållsförtäckning
+### Funktioner
+### Installation
 - Lite info 
-### Användning 
+#### Användning 
 
