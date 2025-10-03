@@ -1,11 +1,13 @@
-## Prague Parking
-
+# Prague Parking
 This is a school assignment for DevSecOps #C 
-Info om projektet etc
 
-### Innehållsförtäckning
-### Funktioner
+## About the project
+Insert info etc
+
+### Table of contents
+### Functions
 ### Installation
-- Lite info 
-#### Användning 
+How to clone 
+How to run
+#### Usage
 
