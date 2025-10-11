@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.Text.RegularExpressions;
 
 class Program
@@ -24,11 +25,12 @@ class Program
             Console.WriteLine("5. Calculate parking fee");
             Console.WriteLine("6. Exit");
             Console.Write("Choose an option (1-6): ");
+            
             string choice = Console.ReadLine();
 
             if (choice == "1") //matches the first choice in a chain
             {
-                Name(garage);
+                Parking(garage);
             }
             else if (choice == "2")
             {
@@ -56,6 +58,37 @@ class Program
             }
             Console.WriteLine("Press Enter to continue...");
             Console.ReadLine();
+
+
         }
+    }
+    static void Parking(string[] garage)
+    {
+        Console.Write("Enter vehicle type (Car/Motorbike): ");
+        string vehicleType = Console.ReadLine().Trim().ToLower();
+
+        if (vehicleType != "Car" && vehicleType != "Motorbike")
+        {
+            Console.WriteLine("Invalid vehicle type. Please enter 'Car' or 'Motorbike'.");
+            return;
+        }
+
+        Console.WriteLine("Format: 1-2 letters, 1-4 numbers, 0-2 letters): ");
+        Console.Write("Enter license plate: ");
+        string registration = Console.ReadLine();
+
+        string pattern = @"^[A-Za-z]{1,2}[0-9]{1,4}[A-Za-z]{0,2}$";
+
+        if (!string.IsNullOrEmpty(registration) && registration.Length <= 10 && Regex.IsMatch(registration, pattern))
+            {
+            Console.WriteLine("License plate is valid");
+            }
+        else
+            {
+            Console.WriteLine("Wrong format for license plate. Please try again");
+            return;
+        }
+
+
     }
 }
