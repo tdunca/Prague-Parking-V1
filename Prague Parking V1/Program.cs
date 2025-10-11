@@ -38,7 +38,7 @@ class Program
             }
             else if (choice == "3")
             {
-                Name(garage);
+                MoveVehicle(garage);
             }
             else if (choice == "4")
             {
@@ -148,5 +148,45 @@ class Program
         }
         Console.WriteLine($"Vehicle with license plate {registration} not found in the garage.");
     }
+    static void MoveVehicle(string[] garage)
+    {
+        Console.WriteLine("Enter current number of parking space (1-100): ");
+        if (!int.TryParse(Console.ReadLine(), out int currentSpace) && currentSpace >= 1 && currentSpace <= 100)
+        {
+            int currentIndex = currentSpace - 1;
+
+            if (!string.IsNullOrEmpty(garage[currentIndex]))
+            {
+                Console.WriteLine("Enter new number of parking space (1-100): ");
+                if (int.TryParse(Console.ReadLine(), out int newSpace) && newSpace >= 1 && newSpace <= 100)
+                {
+                    int newIndex = newSpace - 1;
+                    if (string.IsNullOrEmpty(garage[newIndex]))
+                    {
+                        garage[newIndex] = garage[currentIndex];
+                        garage[currentIndex] = "";
+                        Console.WriteLine($"Vehicle moved from spot {currentSpace} to spot {newSpace}.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("The new parking space is already occupied.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid parking space.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("The current parking space is empty.");
+            }
+        }
+        else 
+        {
+            Console.WriteLine("Invalid parking space.");
+        }
+    }
+
 
 }
