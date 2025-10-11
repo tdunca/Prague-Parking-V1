@@ -34,7 +34,7 @@ class Program
             }
             else if (choice == "2")
             {
-                Name(garage);
+                RetrieveVehicle(garage);
             }
             else if (choice == "3")
             {
@@ -99,7 +99,7 @@ class Program
             }
             else if (vehicleType == "MC" && garage[i].StartsWith("MC#"))
             {
-                if (garage[i].Split('').Length < 2)
+                if (garage[i].Split('|').Length < 2)
                 {
                     garage[i] += $"#{vehicleType}:{registration}";
                     Console.WriteLine($"Motorbike parked in spot {i + 1}.");
@@ -109,6 +109,44 @@ class Program
         }
 
         Console.WriteLine("Garage is full. Cannot park the vehicle.");
+    }
+    static void RetrieveVehicle(string[] garage) //to fetch a vehicle out of the garage
+    {
+        Console.Write("Enter license plate to retrieve: ");
+        string registration = Console.ReadLine();
+
+        for (int i = 0; i < garage.Length; i++)
+        {
+            if (!string.IsNullOrEmpty(garage[i]) && garage[i].Contains(registration))
+            {
+                if (garage[i].StartsWith("MC#"))
+                {
+                    string[] vehicles = garage[i].Split('|'); //for double parking of mc
+                    for (int j = 0; j < vehicles.Length; j++)
+                    {
+                        if vehicles[j].Contains(registration))
+                        {
+                            vehicles[j] = "";
+                            Console.WriteLine($"Motorbike with license plate {registration} retrieved from spot {i + 1}.");
+
+                            garage[i] = string.Join("|", vehicles).Trim('|');
+                            if (string.IsNullOrEmpty(garage[i]))
+                            {
+                                garage[i] = "";
+                            }
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Vehicle with license plate {registration} retrieved from spot {i + 1}.");
+                    garage[i] = ""; //empty the spot
+                    return;
+                }
+            }
+        }
+        Console.WriteLine($"Vehicle with license plate {registration} not found in the garage.");
     }
 
 }
