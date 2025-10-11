@@ -80,15 +80,35 @@ class Program
         string pattern = @"^[A-Za-z]{1,2}[0-9]{1,4}[A-Za-z]{0,2}$";
 
         if (!string.IsNullOrEmpty(registration) && registration.Length <= 10 && Regex.IsMatch(registration, pattern))
-            {
+        {
             Console.WriteLine("License plate is valid");
-            }
+        }
         else
-            {
+        {
             Console.WriteLine("Wrong format for license plate. Please try again");
             return;
         }
 
+        for (int i = 0; i < garage.Length; i++)
+        {
+            if (string.IsNullOrEmpty(garage[i]))
+            {
+                garage[i] = $"{vehicleType}:{registration}";
+                Console.WriteLine($"Vehicle parked in spot {i + 1}.");
+                return;
+            }
+            else if (vehicleType == "MC" && garage[i].StartsWith("MC#"))
+            {
+                if (garage[i].Split('').Length < 2)
+                {
+                    garage[i] += $"#{vehicleType}:{registration}";
+                    Console.WriteLine($"Motorbike parked in spot {i + 1}.");
+                    return;
+                }
+            }
+        }
 
+        Console.WriteLine("Garage is full. Cannot park the vehicle.");
     }
+
 }
